@@ -1,12 +1,9 @@
 package com.pokedex.data;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
@@ -16,8 +13,6 @@ import lombok.Data;
 public class Skill {
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name="skill_name")
     protected String name;
 

@@ -2,6 +2,7 @@ package com.pokedex.data;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class Pokemon {
     @Column(name="pok_level")
     protected int level;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name="pok_skill",
         joinColumns = @JoinColumn(name = "pok_name"),
@@ -36,7 +37,7 @@ public class Pokemon {
     )
     protected List<Skill> skills;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "evolve",
         joinColumns = @JoinColumn(name = "pok_name"),
