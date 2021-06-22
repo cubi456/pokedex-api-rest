@@ -13,10 +13,10 @@ import lombok.Data;
 public class Skill {
 
     @Id
-    @Column(name="skill_name")
+    @Column(name="skill_name",unique = true,nullable = false)
     protected String name;
 
-    @Column(name="skill_type")
+    @Column(name="skill_type",nullable = false)
     protected String type;
-
+    
 }

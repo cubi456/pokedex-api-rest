@@ -14,12 +14,12 @@ import lombok.Data;
 public class Evolution{
 
     @Id
-    @Column(name="evol_name")
+    @Column(name="evol_name",unique = true)
     protected String name;
 
-    @Column(name="evol_types")
+    @Column(name="evol_types",nullable = false)
     protected String types;
     @Column(name="evol_level")
     protected int level;
-
+    
 }

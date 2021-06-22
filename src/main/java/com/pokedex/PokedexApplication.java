@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PokedexApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PokedexApplication.class, args);
+		SpringApplication app = new SpringApplication(PokedexApplication.class);
+		app.setLazyInitialization(false);
+		app.run(args);
 	}
 
 }
