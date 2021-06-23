@@ -31,7 +31,7 @@ public class Pokemon{
     @Column(name="pok_level")
     protected int level;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
         name="pok_skill",
@@ -40,7 +40,7 @@ public class Pokemon{
     )
     protected List<Skill> skills;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
         name = "evolve",
