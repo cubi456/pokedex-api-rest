@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -32,7 +31,7 @@ public class Pokemon{
     @Column(name="pok_level")
     protected int level;
 
-    @ManyToMany(cascade =CascadeType.PERSIST)
+    @ManyToMany(cascade ={CascadeType.PERSIST,CascadeType.MERGE})
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
         name="pok_skill",
@@ -41,7 +40,7 @@ public class Pokemon{
     )
     protected Set<Skill> skills;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
         name = "evolve",

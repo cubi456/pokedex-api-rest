@@ -1,5 +1,6 @@
 package com.pokedex;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pokedex.data.Evolution;
@@ -58,21 +59,23 @@ class PokedexApplicationTests {
 		//Recupero el pokemon
 		Pokemon pokemon = servicio.encontrarPokemon("Charmander");
 		//Recupero las evoluciones y habilidades de un pokemon.
-		List<Skill> Skills = pokemon.getSkills();
-		List<Evolution> evolutions = pokemon.getEvolutions();
+		List<Skill> Skills = new ArrayList<Skill>();
+		Skills.addAll(pokemon.getSkills());
+		List<Evolution> evolutions = new ArrayList<Evolution>();
+		evolutions.addAll(pokemon.getEvolutions());
 		//Controlo que todas las habilidades sean correctas.
 		assertEquals(1,Skills.size());
 		assertEquals("Fire Blast",Skills.get(0).getName());
 		//Controlo que todas las evoluciones sean correctas.
 		assertEquals(2,evolutions.size());
 		//Controlo una de las evoluciones
-		assertEquals("Charizard",evolutions.get(0).getName());
-		assertEquals("Fire - Flying",evolutions.get(0).getTypes());
-		assertEquals(40,evolutions.get(0).getLevel());
+		assertEquals("Charizard",evolutions.get(1).getName());
+		assertEquals("Fire - Flying",evolutions.get(1).getTypes());
+		assertEquals(40,evolutions.get(1).getLevel());
 		//Controlo la otra evolucion
-		assertEquals("Charmeleon",evolutions.get(1).getName());
-		assertEquals("Fire",evolutions.get(1).getTypes());
-		assertEquals(12,evolutions.get(1).getLevel());
+		assertEquals("Charmeleon",evolutions.get(0).getName());
+		assertEquals("Fire",evolutions.get(0).getTypes());
+		assertEquals(12,evolutions.get(0).getLevel());
 	}
 	
 	
