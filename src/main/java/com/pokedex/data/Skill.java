@@ -7,6 +7,7 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+
 @Data
 @Entity
 @Table(name="skills")
@@ -17,6 +18,5 @@ public class Skill {
     protected String name;
 
     @Column(name="skill_type",nullable = false)
-    protected String type;
-    
+    protected String type;   
 }

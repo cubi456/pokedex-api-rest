@@ -1,6 +1,6 @@
 package com.pokedex.data;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,21 +32,21 @@ public class Pokemon{
     @Column(name="pok_level")
     protected int level;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade =CascadeType.PERSIST)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
         name="pok_skill",
         joinColumns = @JoinColumn(name = "pok_name"),
         inverseJoinColumns = @JoinColumn(name = "skill_name")
     )
-    protected List<Skill> skills;
+    protected Set<Skill> skills;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
         name = "evolve",
         joinColumns = @JoinColumn(name = "pok_name"),
         inverseJoinColumns = @JoinColumn(name = "evol_name")
     )
-    protected List<Evolution> evolutions;
+    protected Set<Evolution> evolutions;
 }
