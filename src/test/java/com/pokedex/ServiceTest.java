@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import com.pokedex.services.PokemonService;
 
 
 @SpringBootTest
-public class MockitoTest {
+public class ServiceTest {
 
     @MockBean
     private pokemonRepository pokemons;
@@ -66,9 +67,30 @@ public class MockitoTest {
 
         mockPokemon.setEvolutions(evolutions);
 
+		Pokemon pokemon_1 = new Pokemon();
+		Pokemon pokemon_2 = new Pokemon();
+		pokemon_1.setName("prueba1");
+		pokemon_2.setName("prueba2");
+
+		List<Pokemon> pokemonsList = new ArrayList<Pokemon>();
+		pokemonsList.add(mockPokemon);
+		pokemonsList.add(pokemon_1);
+		pokemonsList.add(pokemon_2);
 
         when(pokemons.findById("Charmander")).thenReturn(Optional.ofNullable(mockPokemon));
+		when(pokemons.findAll()).thenReturn(pokemonsList);
+		when(pokemons.save(pokemon_1)).thenReturn(pokemon_1);
+		doNothing().when(pokemons).delete(mockPokemon);
     }
+
+	@Test
+	void listarPokemonTest()
+	{
+		List<Pokemon> pokemonList = service.listarPokemons();
+		assertEquals("Charmander",pokemonList.get(0).getName());
+		assertEquals("prueba1",pokemonList.get(1).getName());
+		assertEquals("prueba2",pokemonList.get(2).getName());
+	}
 
 	@Test
 	/**
@@ -108,5 +130,19 @@ public class MockitoTest {
 		assertEquals("Charmeleon",evolutions.get(0).getName());
 		assertEquals("Fire",evolutions.get(0).getTypes());
 		assertEquals(12,evolutions.get(0).getLevel());
+	}
+
+	@Test
+	void guardarPokemonTest()
+	{
+		Pokemon pokemon_1 = new Pokemon();
+		pokemon_1.setName("prueba1");
+		service.guardar(pokemon_1);
+	}
+
+	@Test
+	void eliminarPokemonTest()
+	{
+		service.eliminar("Charmander");
 	}
 }
