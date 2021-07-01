@@ -30,7 +30,7 @@ public class Pokemon{
 
     @Column(name="pok_level")
     protected int level;
-
+    
     @ManyToMany(cascade ={CascadeType.PERSIST,CascadeType.MERGE})
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(
