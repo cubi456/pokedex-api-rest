@@ -113,18 +113,21 @@ class PokedexApplicationTests {
 		//Creo los nuevos datos para editar el pokemon.
 		Pokemon nuevaEntrada = new Pokemon();
 		
-		nuevaEntrada.setName("pokemonTest");
+		nuevaEntrada.setName(backup.getName());
 		nuevaEntrada.setTypes("test3 - test4");
 		nuevaEntrada.setLevel(40);
+		nuevaEntrada.setSkills(backup.getSkills());
+		nuevaEntrada.setEvolutions(backup.getEvolutions());
+		
 		//Edito el pokemon en la base de datos.
 		servicio.guardar(nuevaEntrada);
 		//Recupero el pokemon editado de la base de datos.
-		Pokemon auxiliar = servicio.encontrarPokemon("pokemonTest");
+		Pokemon auxiliar = servicio.encontrarPokemon(backup.getName());
 		//Controlo que la informacion este correcta.
-		assertEquals("pokemonTest",auxiliar.getName());
+		assertEquals(backup.getName(),auxiliar.getName());
 		assertEquals("test3 - test4",auxiliar.getTypes());
 		assertEquals(40,auxiliar.getLevel());
-		//Restauro el estado anterior de la base de datos.
+
 		servicio.guardar(backup);
 	}
 
